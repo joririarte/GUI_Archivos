@@ -232,6 +232,8 @@ namespace CppCLRWinFormsProject {
 		private: System::Void btn_Agregar_Click(System::Object^ sender, System::EventArgs^ e) {
 			//abre form para agregar item
 			Form_AgregarItem^ agregarItem = gcnew Form_AgregarItem();
+			agregarItem->btn_modificar->Enabled = false;
+			agregarItem->btn_modificar->Visible = false;
 			agregarItem->ShowDialog();
 			this->UpdateGrid();
 		}
@@ -240,6 +242,16 @@ namespace CppCLRWinFormsProject {
 		}
 		private: System::Void btn_modificar_Click(System::Object^ sender, System::EventArgs^ e) {
 			//abre form para modificar un item
+			Form_AgregarItem^ modificarItem = gcnew Form_AgregarItem();
+			modificarItem->Text = L"Modificar Item";
+			modificarItem->textBox_codigo->Enabled = false;
+			modificarItem->textBox_codigo->Text = this->tabla->CurrentCell->Value->ToString();
+			modificarItem->btn_AgregarItem->Enabled = false;
+			modificarItem->btn_AgregarItem->Visible = false;
+			modificarItem->btn_modificar->Location = System::Drawing::Point(283, 317);
+			modificarItem->comboBox_tipo->Enabled = false;
+			modificarItem->ShowDialog();
+			this->UpdateGrid();
 		}
 		private: System::Void btn_quitar_Click(System::Object^ sender, System::EventArgs^ e) {
 			//quita un item

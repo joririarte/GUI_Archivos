@@ -35,7 +35,7 @@ namespace GUI_Archivos {
 			}
 		}
 	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::TextBox^ textBox_codigo;
+	public: System::Windows::Forms::TextBox^ textBox_codigo;
 	private: System::Windows::Forms::TextBox^ textBox_descripcion;
 	protected:
 
@@ -48,12 +48,13 @@ namespace GUI_Archivos {
 
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Label^ label5;
-	private: System::Windows::Forms::ComboBox^ comboBox_tipo;
+	public: System::Windows::Forms::ComboBox^ comboBox_tipo;
 
-	private: System::Windows::Forms::Button^ btn_AgregarItem;
+	public: System::Windows::Forms::Button^ btn_AgregarItem;
 	private: System::Windows::Forms::TextBox^ textBox_precio;
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::Button^ btn_Cancelar;
+	public: System::Windows::Forms::Button^ btn_modificar;
 
 	private:
 		/// <summary>
@@ -82,6 +83,7 @@ namespace GUI_Archivos {
 			this->textBox_precio = (gcnew System::Windows::Forms::TextBox());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->btn_Cancelar = (gcnew System::Windows::Forms::Button());
+			this->btn_modificar = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -104,6 +106,7 @@ namespace GUI_Archivos {
 			this->textBox_codigo->Name = L"textBox_codigo";
 			this->textBox_codigo->Size = System::Drawing::Size(191, 29);
 			this->textBox_codigo->TabIndex = 1;
+			this->textBox_codigo->TextChanged += gcnew System::EventHandler(this, &Form_AgregarItem::textBox_codigo_TextChanged);
 			// 
 			// textBox_descripcion
 			// 
@@ -233,11 +236,24 @@ namespace GUI_Archivos {
 			this->btn_Cancelar->UseVisualStyleBackColor = true;
 			this->btn_Cancelar->Click += gcnew System::EventHandler(this, &Form_AgregarItem::btn_Cancelar_Click);
 			// 
+			// btn_modificar
+			// 
+			this->btn_modificar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btn_modificar->Location = System::Drawing::Point(155, 317);
+			this->btn_modificar->Name = L"btn_modificar";
+			this->btn_modificar->Size = System::Drawing::Size(107, 44);
+			this->btn_modificar->TabIndex = 14;
+			this->btn_modificar->Text = L"Modificar";
+			this->btn_modificar->UseVisualStyleBackColor = true;
+			this->btn_modificar->Click += gcnew System::EventHandler(this, &Form_AgregarItem::btn_modificar_Click);
+			// 
 			// Form_AgregarItem
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(402, 382);
+			this->Controls->Add(this->btn_modificar);
 			this->Controls->Add(this->btn_Cancelar);
 			this->Controls->Add(this->textBox_precio);
 			this->Controls->Add(this->label6);
@@ -263,5 +279,7 @@ namespace GUI_Archivos {
 #pragma endregion
 	private: System::Void btn_AgregarItem_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void btn_Cancelar_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void btn_modificar_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void textBox_codigo_TextChanged(System::Object^ sender, System::EventArgs^ e);
 };
 }
