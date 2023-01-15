@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "Form_AgregarItem.h"
-#include "Item.h"
 #include "GlobalFunctions.h"
 #include <string>
 #include <fstream>
@@ -17,25 +16,9 @@ System::Void GUI_Archivos::Form_AgregarItem::btn_AgregarItem_Click(System::Objec
         this->textBox_CantMin->TextLength > 0) {
         Reg::itemStock articulo;
         if (!buscar(std::stoi(toStandardString(this->textBox_codigo->Text)), articulo)) {
-            articulo.codigo = std::stoi(toStandardString(this->textBox_codigo->Text));
-            articulo.precio = std::stof(toStandardString(this->textBox_precio->Text));
-            articulo.cantActual = std::stoi(toStandardString(this->textBox_CantActual->Text));
-            articulo.cantMinima = std::stoi(toStandardString(this->textBox_CantMin->Text));
-            articulo.tipo = this->comboBox_tipo->SelectedIndex;
-            std::string descr = toStandardString(this->textBox_descripcion->Text);
-            for (int i = 0; i < 20; i++) {
-                if (i < descr.size())
-                    articulo.descripcion[i] = descr[i];
-                else
-                    articulo.descripcion[i] = ' ';
-            }
-
-            //esta parte deberia estar en global functions
-            std::ofstream archStock;
-            archStock.open("stock.dat", std::ios::app | std::ios::binary);
-            if (!archStock.fail())
-                archStock.write((char*)&articulo, sizeof(Reg::itemStock));
-            archStock.close();
+            this->cargarRegistro(articulo);
+            if (globalFunctions::altaRegistro(articulo))
+                MessageBox::Show(L"Articulo registrado exitosamente!", L"Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
             this->Close();
         }
         else
@@ -54,8 +37,17 @@ System::Void GUI_Archivos::Form_AgregarItem::btn_Cancelar_Click(System::Object^ 
 
 System::Void GUI_Archivos::Form_AgregarItem::btn_modificar_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    //tiene que preparar un item para mandarlo a una funcion
-    //de global functions que haga la modificacion con el struct
+    auto result = MessageBox::Show(L"Está a punto de modificar un registro!", L"Atención!", MessageBoxButtons::OKCancel,MessageBoxIcon::Warning);
+    if (result == System::Windows::Forms::DialogResult::OK) {
+        Reg::itemStock articulo;
+        this->cargarRegistro(articulo);
+        if (globalFunctions::modificarRegistro(articulo)) {
+            MessageBox::Show(L"Registro modificado exitosamente!", L"Éxito!", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+            this->Close();
+        }
+        else
+            MessageBox::Show(L"Error en modificación de registro!", L"Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+    }
     return System::Void();
 }
 
@@ -65,27 +57,52 @@ System::Void GUI_Archivos::Form_AgregarItem::textBox_codigo_TextChanged(System::
     std::string text = toStandardString(this->textBox_codigo->Text);
     if (text.size() >= 6)
         if (buscar(std::stoi(text), articulo)) {
-            this->comboBox_tipo->SelectedIndex = articulo.tipo;
-            this->textBox_precio->Text = toSystemString(std::to_string(articulo.precio));
-            std::string descr;
-            for (char l : articulo.descripcion) descr += l;
-            this->textBox_descripcion->Text = toSystemString(descr);
-            this->textBox_CantActual->Text = toSystemString(std::to_string(articulo.cantActual));
-            this->textBox_CantMin->Text = toSystemString(std::to_string(articulo.cantMinima));
+            this->completar(articulo);
         }
         else {
-            this->comboBox_tipo->SelectedIndex=-1;
-            this->textBox_precio->Text = "";
-            this->textBox_descripcion->Text = "";
-            this->textBox_CantActual->Text = "";
-            this->textBox_CantMin->Text = "";
+            this->limpiar();
         }
     else {
-        this->comboBox_tipo->SelectedIndex = -1;
-        this->textBox_precio->Text = "";
-        this->textBox_descripcion->Text = "";
-        this->textBox_CantActual->Text = "";
-        this->textBox_CantMin->Text = "";
+        this->limpiar();
+    }
+    return System::Void();
+}
+
+System::Void GUI_Archivos::Form_AgregarItem::completar(Reg::itemStock articulo)
+{
+    this->comboBox_tipo->SelectedIndex = articulo.tipo;
+    this->textBox_precio->Text = toSystemString(std::to_string(articulo.precio));
+    std::string descr;
+    for (char l : articulo.descripcion) descr += l;
+    this->textBox_descripcion->Text = toSystemString(descr);
+    this->textBox_CantActual->Text = toSystemString(std::to_string(articulo.cantActual));
+    this->textBox_CantMin->Text = toSystemString(std::to_string(articulo.cantMinima));
+    return System::Void();
+}
+
+System::Void GUI_Archivos::Form_AgregarItem::limpiar()
+{
+    this->comboBox_tipo->SelectedIndex = -1;
+    this->textBox_precio->Text = "";
+    this->textBox_descripcion->Text = "";
+    this->textBox_CantActual->Text = "";
+    this->textBox_CantMin->Text = "";
+    return System::Void();
+}
+
+System::Void GUI_Archivos::Form_AgregarItem::cargarRegistro(Reg::itemStock& articulo)
+{
+    articulo.codigo = std::stoi(toStandardString(this->textBox_codigo->Text));
+    articulo.precio = std::stof(toStandardString(this->textBox_precio->Text));
+    articulo.cantActual = std::stoi(toStandardString(this->textBox_CantActual->Text));
+    articulo.cantMinima = std::stoi(toStandardString(this->textBox_CantMin->Text));
+    articulo.tipo = this->comboBox_tipo->SelectedIndex;
+    std::string descr = toStandardString(this->textBox_descripcion->Text);
+    for (int i = 0; i < 20; i++) {
+        if (i < descr.size())
+            articulo.descripcion[i] = descr[i];
+        else
+            articulo.descripcion[i] = ' ';
     }
     return System::Void();
 }

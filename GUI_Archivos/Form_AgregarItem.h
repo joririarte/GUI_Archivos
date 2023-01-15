@@ -1,4 +1,5 @@
 #pragma once
+#include "Item.h"
 
 namespace GUI_Archivos {
 
@@ -36,24 +37,24 @@ namespace GUI_Archivos {
 		}
 	private: System::Windows::Forms::Label^ label1;
 	public: System::Windows::Forms::TextBox^ textBox_codigo;
-	private: System::Windows::Forms::TextBox^ textBox_descripcion;
+	public: System::Windows::Forms::TextBox^ textBox_descripcion;
 	protected:
 
 
 	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::TextBox^ textBox_CantActual;
+	public: System::Windows::Forms::TextBox^ textBox_CantActual;
 
 	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::TextBox^ textBox_CantMin;
+	public: System::Windows::Forms::TextBox^ textBox_CantMin;
 
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Label^ label5;
 	public: System::Windows::Forms::ComboBox^ comboBox_tipo;
 
 	public: System::Windows::Forms::Button^ btn_AgregarItem;
-	private: System::Windows::Forms::TextBox^ textBox_precio;
+	public: System::Windows::Forms::TextBox^ textBox_precio;
 	private: System::Windows::Forms::Label^ label6;
-	private: System::Windows::Forms::Button^ btn_Cancelar;
+	public: System::Windows::Forms::Button^ btn_Cancelar;
 	public: System::Windows::Forms::Button^ btn_modificar;
 
 	private:
@@ -210,8 +211,12 @@ namespace GUI_Archivos {
 			this->textBox_precio->Location = System::Drawing::Point(180, 121);
 			this->textBox_precio->MaxLength = 20;
 			this->textBox_precio->Name = L"textBox_precio";
+			this->textBox_precio->RightToLeft = System::Windows::Forms::RightToLeft::Yes;
 			this->textBox_precio->Size = System::Drawing::Size(191, 29);
 			this->textBox_precio->TabIndex = 12;
+			this->textBox_precio->Text = L"0.00";
+			this->textBox_precio->TextChanged += gcnew System::EventHandler(this, &Form_AgregarItem::textBox_precio_TextChanged);
+			this->textBox_precio->Click += gcnew System::EventHandler(this, &Form_AgregarItem::textBox_precio_Click);
 			// 
 			// label6
 			// 
@@ -281,5 +286,14 @@ namespace GUI_Archivos {
 	private: System::Void btn_Cancelar_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void btn_modificar_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void textBox_codigo_TextChanged(System::Object^ sender, System::EventArgs^ e);
+	public:  System::Void completar(Reg::itemStock articulo);
+	private: System::Void limpiar();
+	private: System::Void cargarRegistro(Reg::itemStock& articulo);
+	private: System::Void textBox_precio_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+		this->textBox_precio->Select(this->textBox_precio->Text->Length, 0);
+	}
+	private: System::Void textBox_precio_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->textBox_precio->Select(this->textBox_precio->Text->Length, 0);
+	}
 };
 }

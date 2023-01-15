@@ -6,6 +6,6 @@ namespace Reg
 		int codigo, cantActual, cantMinima;
 		int tipo;//0: Procesador, 1: Motherboard, 2: RAM,3: Placa de Video.
 		char descripcion[20];
-		float precio;
+		float precio;//trabajar con int en centimos y ver como poner la coma en el front
 	};
 };
