@@ -213,7 +213,6 @@ namespace GUI_Archivos {
 			this->textBox_precio->Location = System::Drawing::Point(180, 121);
 			this->textBox_precio->MaxLength = 20;
 			this->textBox_precio->Name = L"textBox_precio";
-			this->textBox_precio->RightToLeft = System::Windows::Forms::RightToLeft::Yes;
 			this->textBox_precio->Size = System::Drawing::Size(191, 29);
 			this->textBox_precio->TabIndex = 12;
 			// 
