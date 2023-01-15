@@ -50,6 +50,7 @@ System::Void CppCLRWinFormsProject::Form1::btn_Buscar_Click(System::Object^ send
 	buscarItem->btn_modificar->Enabled = false;
 	buscarItem->btn_modificar->Visible = false;
 	buscarItem->btn_Borrar->Visible = true;
+	buscarItem->textBox_codigo->Text = this->tabla->CurrentRow->Cells[0]->Value->ToString();
 	buscarItem->ShowDialog();
 	this->UpdateGrid();
 	return System::Void();
@@ -60,7 +61,7 @@ System::Void CppCLRWinFormsProject::Form1::btn_modificar_Click(System::Object^ s
 	Form_AgregarItem^ modificarItem = gcnew Form_AgregarItem();
 	modificarItem->Text = L"Modificar Item";
 	modificarItem->textBox_codigo->Enabled = false;
-	modificarItem->textBox_codigo->Text = this->tabla->CurrentCell->Value->ToString();
+	modificarItem->textBox_codigo->Text = this->tabla->CurrentRow->Cells[0]->Value->ToString();
 	modificarItem->btn_AgregarItem->Enabled = false;
 	modificarItem->btn_AgregarItem->Visible = false;
 	modificarItem->btn_modificar->Location = System::Drawing::Point(283, 317);

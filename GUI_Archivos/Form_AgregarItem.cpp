@@ -57,12 +57,12 @@ System::Void GUI_Archivos::Form_AgregarItem::btn_Borrar_Click(System::Object^ se
     if (result == System::Windows::Forms::DialogResult::OK) {
         Reg::itemStock articulo;
         this->cargarRegistro(articulo);//FALTA IMPLEMENTAR BORRAR REGISTRO EN GLOBAL FUNCTIONS
-        //if (globalFunctions::borrarRegistro(articulo)) {
+        if (globalFunctions::borrarRegistro(articulo.codigo)) {
             MessageBox::Show(L"Registro BORRADO exitosamente!", L"Éxito!", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
             this->Close();
-        //}
-        //else
-           // MessageBox::Show(L"Error en modificación de registro!", L"Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        }
+        else
+            MessageBox::Show(L"Error en BORRADO de registro! \nPor favor cierre e intente nuevamente", L"Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
     return System::Void();
 }

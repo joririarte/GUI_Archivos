@@ -7,5 +7,5 @@ namespace globalFunctions {
  bool buscar(int cod, Reg::itemStock& articulo);
  bool altaRegistro(Reg::itemStock articulo);
  bool modificarRegistro(Reg::itemStock articulo);
- bool borrarRegistro(Reg::itemStock articulo);//falta implementar
+ bool borrarRegistro(int cod);//falta implementar
 }

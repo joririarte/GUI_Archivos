@@ -71,8 +71,27 @@ bool globalFunctions::modificarRegistro(Reg::itemStock articuloNuevo)
 	return exito;
 }
 
-bool globalFunctions::borrarRegistro(Reg::itemStock articulo)
+bool globalFunctions::borrarRegistro(int cod)
 {
-
-	return false;
+	std::ifstream stockViejo;
+	std::ofstream stockNuevo;
+	stockViejo.open("stock.dat", std::ios::binary);
+	stockNuevo.open("stockTemp.dat", std::ios::binary);
+	if (!(stockViejo.fail() || stockNuevo.fail())) {
+		Reg::itemStock item;
+		do {
+			stockViejo.read((char*)&item, sizeof(Reg::itemStock));
+			if (!stockViejo.eof()) {
+				if (item.codigo != cod) {
+					stockNuevo.write((char*)&item, sizeof(Reg::itemStock));
+				}
+			}
+		} while (!stockViejo.eof());
+	}
+	else return false;
+	stockViejo.close();
+	stockNuevo.close();
+	remove("stock.dat");
+	rename("stockTemp.dat", "stock.dat");
+	return true;
 }
