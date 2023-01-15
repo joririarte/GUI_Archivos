@@ -6,3 +6,19 @@ Realizado en C++/CLR, el sistema usa archivos binarios locales como base de dato
 * Flujo de archivos de C, con fstream.
 * CRUD
 ## Capturas de pantalla
+
+Pantalla principal
+
+![Pantalla_Principal_Inventario](Imagenes/Inventario.png)
+
+Agregar un item
+
+![Agregar](Imagenes/Agregar.png)
+
+Buscar/Borrar Item
+
+![Buscar_Borrar](Imagenes/Buscar_Borrar.png)
+
+Modificar Item
+
+![Modificar](Imagenes/Modificar.png)
