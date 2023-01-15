@@ -56,8 +56,9 @@ namespace CppCLRWinFormsProject {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ cantActual;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ cantMin;
 	private: System::Windows::Forms::Label^ lbl_inventario;
-	private: System::Windows::Forms::Button^ btn_quitar;
 	private: System::Windows::Forms::Button^ btn_modificar;
+
+
 
 
 
@@ -91,7 +92,6 @@ namespace CppCLRWinFormsProject {
 			this->cantActual = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->cantMin = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->lbl_inventario = (gcnew System::Windows::Forms::Label());
-			this->btn_quitar = (gcnew System::Windows::Forms::Button());
 			this->btn_modificar = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tabla))->BeginInit();
 			this->SuspendLayout();
@@ -100,7 +100,7 @@ namespace CppCLRWinFormsProject {
 			// 
 			this->btn_Agregar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btn_Agregar->Location = System::Drawing::Point(585, 313);
+			this->btn_Agregar->Location = System::Drawing::Point(584, 358);
 			this->btn_Agregar->Name = L"btn_Agregar";
 			this->btn_Agregar->Size = System::Drawing::Size(107, 42);
 			this->btn_Agregar->TabIndex = 6;
@@ -112,7 +112,7 @@ namespace CppCLRWinFormsProject {
 			// 
 			this->btn_Buscar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btn_Buscar->Location = System::Drawing::Point(585, 409);
+			this->btn_Buscar->Location = System::Drawing::Point(584, 406);
 			this->btn_Buscar->Name = L"btn_Buscar";
 			this->btn_Buscar->Size = System::Drawing::Size(107, 42);
 			this->btn_Buscar->TabIndex = 7;
@@ -180,26 +180,14 @@ namespace CppCLRWinFormsProject {
 			this->lbl_inventario->TabIndex = 9;
 			this->lbl_inventario->Text = L"INVENTARIO";
 			// 
-			// btn_quitar
-			// 
-			this->btn_quitar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->btn_quitar->Location = System::Drawing::Point(585, 457);
-			this->btn_quitar->Name = L"btn_quitar";
-			this->btn_quitar->Size = System::Drawing::Size(107, 42);
-			this->btn_quitar->TabIndex = 10;
-			this->btn_quitar->Text = L"Quitar";
-			this->btn_quitar->UseVisualStyleBackColor = true;
-			this->btn_quitar->Click += gcnew System::EventHandler(this, &Form1::btn_quitar_Click);
-			// 
 			// btn_modificar
 			// 
 			this->btn_modificar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btn_modificar->Location = System::Drawing::Point(585, 361);
+			this->btn_modificar->Location = System::Drawing::Point(584, 457);
 			this->btn_modificar->Name = L"btn_modificar";
 			this->btn_modificar->Size = System::Drawing::Size(107, 42);
-			this->btn_modificar->TabIndex = 11;
+			this->btn_modificar->TabIndex = 10;
 			this->btn_modificar->Text = L"Modificar";
 			this->btn_modificar->UseVisualStyleBackColor = true;
 			this->btn_modificar->Click += gcnew System::EventHandler(this, &Form1::btn_modificar_Click);
@@ -210,7 +198,6 @@ namespace CppCLRWinFormsProject {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(703, 511);
 			this->Controls->Add(this->btn_modificar);
-			this->Controls->Add(this->btn_quitar);
 			this->Controls->Add(this->lbl_inventario);
 			this->Controls->Add(this->tabla);
 			this->Controls->Add(this->btn_Buscar);
@@ -231,8 +218,7 @@ namespace CppCLRWinFormsProject {
 		//Metodos Formulario
 		private: System::Void btn_Agregar_Click(System::Object^ sender, System::EventArgs^ e);
 		private: System::Void btn_Buscar_Click(System::Object^ sender, System::EventArgs^ e);
-		private: System::Void btn_modificar_Click(System::Object^ sender, System::EventArgs^ e);
-		private: System::Void btn_quitar_Click(System::Object^ sender, System::EventArgs^ e);
 		private: System::Void Form1_Load(System::Object^ sender, System::EventArgs^ e);
+		private: System::Void btn_modificar_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

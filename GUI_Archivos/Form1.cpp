@@ -35,6 +35,7 @@ System::Void CppCLRWinFormsProject::Form1::btn_Agregar_Click(System::Object^ sen
 	Form_AgregarItem^ agregarItem = gcnew Form_AgregarItem();
 	agregarItem->btn_modificar->Enabled = false;
 	agregarItem->btn_modificar->Visible = false;
+	agregarItem->btn_Borrar->Enabled = false;
 	agregarItem->ShowDialog();
 	this->UpdateGrid();
 	return System::Void();
@@ -44,13 +45,13 @@ System::Void CppCLRWinFormsProject::Form1::btn_Buscar_Click(System::Object^ send
 {
 	Form_AgregarItem^ buscarItem = gcnew Form_AgregarItem();
 	buscarItem->Text = L"Buscar";
-	buscarItem->btn_Cancelar->Text = L"Hecho";
-	buscarItem->btn_Cancelar->Location = System::Drawing::Point(155, 317);
 	buscarItem->btn_AgregarItem->Enabled = false;
 	buscarItem->btn_AgregarItem->Visible = false;
 	buscarItem->btn_modificar->Enabled = false;
 	buscarItem->btn_modificar->Visible = false;
+	buscarItem->btn_Borrar->Visible = true;
 	buscarItem->ShowDialog();
+	this->UpdateGrid();
 	return System::Void();
 }
 
@@ -64,13 +65,9 @@ System::Void CppCLRWinFormsProject::Form1::btn_modificar_Click(System::Object^ s
 	modificarItem->btn_AgregarItem->Visible = false;
 	modificarItem->btn_modificar->Location = System::Drawing::Point(283, 317);
 	modificarItem->comboBox_tipo->Enabled = false;
+	modificarItem->btn_Borrar->Enabled = false;
 	modificarItem->ShowDialog();
 	this->UpdateGrid();
-	return System::Void();
-}
-
-System::Void CppCLRWinFormsProject::Form1::btn_quitar_Click(System::Object^ sender, System::EventArgs^ e)
-{
 	return System::Void();
 }
 

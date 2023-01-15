@@ -56,6 +56,7 @@ namespace GUI_Archivos {
 	private: System::Windows::Forms::Label^ label6;
 	public: System::Windows::Forms::Button^ btn_Cancelar;
 	public: System::Windows::Forms::Button^ btn_modificar;
+	public: System::Windows::Forms::Button^ btn_Borrar;
 
 	private:
 		/// <summary>
@@ -85,6 +86,7 @@ namespace GUI_Archivos {
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->btn_Cancelar = (gcnew System::Windows::Forms::Button());
 			this->btn_modificar = (gcnew System::Windows::Forms::Button());
+			this->btn_Borrar = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -214,9 +216,6 @@ namespace GUI_Archivos {
 			this->textBox_precio->RightToLeft = System::Windows::Forms::RightToLeft::Yes;
 			this->textBox_precio->Size = System::Drawing::Size(191, 29);
 			this->textBox_precio->TabIndex = 12;
-			this->textBox_precio->Text = L"0.00";
-			this->textBox_precio->TextChanged += gcnew System::EventHandler(this, &Form_AgregarItem::textBox_precio_TextChanged);
-			this->textBox_precio->Click += gcnew System::EventHandler(this, &Form_AgregarItem::textBox_precio_Click);
 			// 
 			// label6
 			// 
@@ -253,6 +252,19 @@ namespace GUI_Archivos {
 			this->btn_modificar->UseVisualStyleBackColor = true;
 			this->btn_modificar->Click += gcnew System::EventHandler(this, &Form_AgregarItem::btn_modificar_Click);
 			// 
+			// btn_Borrar
+			// 
+			this->btn_Borrar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btn_Borrar->Location = System::Drawing::Point(283, 317);
+			this->btn_Borrar->Name = L"btn_Borrar";
+			this->btn_Borrar->Size = System::Drawing::Size(107, 44);
+			this->btn_Borrar->TabIndex = 15;
+			this->btn_Borrar->Text = L"Borrar";
+			this->btn_Borrar->UseVisualStyleBackColor = true;
+			this->btn_Borrar->Visible = false;
+			this->btn_Borrar->Click += gcnew System::EventHandler(this, &Form_AgregarItem::btn_Borrar_Click);
+			// 
 			// Form_AgregarItem
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -262,7 +274,6 @@ namespace GUI_Archivos {
 			this->Controls->Add(this->btn_Cancelar);
 			this->Controls->Add(this->textBox_precio);
 			this->Controls->Add(this->label6);
-			this->Controls->Add(this->btn_AgregarItem);
 			this->Controls->Add(this->comboBox_tipo);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->textBox_CantMin);
@@ -273,6 +284,8 @@ namespace GUI_Archivos {
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->textBox_codigo);
 			this->Controls->Add(this->label1);
+			this->Controls->Add(this->btn_Borrar);
+			this->Controls->Add(this->btn_AgregarItem);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Name = L"Form_AgregarItem";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
@@ -282,18 +295,16 @@ namespace GUI_Archivos {
 
 		}
 #pragma endregion
+		//Metodos Formulario
 	private: System::Void btn_AgregarItem_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void btn_Cancelar_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void btn_modificar_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void textBox_codigo_TextChanged(System::Object^ sender, System::EventArgs^ e);
+		 //Metodos Front
 	public:  System::Void completar(Reg::itemStock articulo);
 	private: System::Void limpiar();
+		 //Metodos Back
 	private: System::Void cargarRegistro(Reg::itemStock& articulo);
-	private: System::Void textBox_precio_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-		this->textBox_precio->Select(this->textBox_precio->Text->Length, 0);
-	}
-	private: System::Void textBox_precio_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->textBox_precio->Select(this->textBox_precio->Text->Length, 0);
-	}
+	private: System::Void btn_Borrar_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

@@ -51,6 +51,22 @@ System::Void GUI_Archivos::Form_AgregarItem::btn_modificar_Click(System::Object^
     return System::Void();
 }
 
+System::Void GUI_Archivos::Form_AgregarItem::btn_Borrar_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    auto result = MessageBox::Show(L"Está a punto de BORRAR un registro! \n\nEsta acción NO SE PUEDE deshacer", L"Atención!", MessageBoxButtons::OKCancel, MessageBoxIcon::Warning);
+    if (result == System::Windows::Forms::DialogResult::OK) {
+        Reg::itemStock articulo;
+        this->cargarRegistro(articulo);//FALTA IMPLEMENTAR BORRAR REGISTRO EN GLOBAL FUNCTIONS
+        //if (globalFunctions::borrarRegistro(articulo)) {
+            MessageBox::Show(L"Registro BORRADO exitosamente!", L"Éxito!", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+            this->Close();
+        //}
+        //else
+           // MessageBox::Show(L"Error en modificación de registro!", L"Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+    }
+    return System::Void();
+}
+
 System::Void GUI_Archivos::Form_AgregarItem::textBox_codigo_TextChanged(System::Object^ sender, System::EventArgs^ e)
 {
     Reg::itemStock articulo;

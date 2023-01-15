@@ -70,3 +70,9 @@ bool globalFunctions::modificarRegistro(Reg::itemStock articuloNuevo)
 	archStock.close();
 	return exito;
 }
+
+bool globalFunctions::borrarRegistro(Reg::itemStock articulo)
+{
+
+	return false;
+}
